@@ -1,0 +1,184 @@
+import React, { useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { ArrowRight, Zap, Lock, Globe, DollarSign, Clock, Shield } from 'lucide-react';
+
+const ZeebuDashboard = () => {
+  const [activeTab, setActiveTab] = useState('overview');
+
+  const performanceData = [
+    { name: 'Traditional', value: 20, fill: '#e74c3c' },
+    { name: 'Zeebu', value: 2, fill: '#2ecc71' },
+  ];
+
+  const tokenData = [
+    { name: 'Private Sale', value: 10 },
+    { name: 'Liquid Token', value: 7.38 },
+    { name: 'Team & Advisor', value: 6 },
+    { name: 'Founders', value: 4 },
+    { name: 'ZBU LABS', value: 20 },
+    { name: 'Settlement & Loyalty', value: 25.06 },
+    { name: 'Treasury/Reserve', value: 15 },
+    { name: 'ZBU CLUB', value: 5 },
+    { name: 'Burn', value: 7.55 },
+  ];
+
+  return (
+    <div className="p-4 max-w-6xl mx-auto bg-gray-100 rounded-lg shadow-lg">
+      <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Zeebu Ecosystem Dashboard</h1>
+      
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+        <TabsList className="grid w-full grid-cols-4">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="architecture">Architecture</TabsTrigger>
+          <TabsTrigger value="performance">Performance</TabsTrigger>
+          <TabsTrigger value="impact">Impact</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="overview" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl">Zeebu: Revolutionizing Telecom Wholesale</CardTitle>
+              <CardDescription>A decentralized ecosystem for voice traffic exchange</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-4">Zeebu leverages blockchain technology to address inefficiencies, opacity, and trust issues in traditional telecom wholesale systems.</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center space-x-2">
+                  <Shield className="text-blue-500" />
+                  <span>Transparent and auditable records</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Zap className="text-yellow-500" />
+                  <span>Smart contract-enabled payments</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <ArrowRight className="text-green-500" />
+                  <span>Reduced intermediaries</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <DollarSign className="text-purple-500" />
+                  <span>Loyalty token rewards</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="architecture" className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Platform Structure</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  <li className="flex items-center space-x-2">
+                    <ArrowRight size={16} className="text-blue-500" />
+                    <span>UI/UX Layer for customers and merchants</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <ArrowRight size={16} className="text-green-500" />
+                    <span>PSP Layer for payment processing and settlement</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <ArrowRight size={16} className="text-yellow-500" />
+                    <span>Blockchain Layer for on-chain asset settlement</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <ArrowRight size={16} className="text-purple-500" />
+                    <span>Back-end Layer for databasing and automation</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>ZBU Token Allocation</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={tokenData} layout="vertical">
+                    <XAxis type="number" />
+                    <YAxis dataKey="name" type="category" width={150} />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#3498db" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="performance" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Settlement Time Comparison</CardTitle>
+              <CardDescription>Zeebu vs Traditional Systems (in days)</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={performanceData}>
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="value" />
+                </BarChart>
+              </ResponsiveContainer>
+              <p className="mt-4 text-center font-semibold">Zeebu reduces settlement time by 90% compared to traditional systems.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="impact" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Zeebu's Impact and Future</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h3 className="font-bold mb-2 text-lg">Key Advantages</h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-center space-x-2">
+                      <Clock className="text-blue-500" />
+                      <span>Faster settlements</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <Lock className="text-green-500" />
+                      <span>Enhanced security</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <Globe className="text-purple-500" />
+                      <span>Global accessibility</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-bold mb-2 text-lg">Future Directions</h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-center space-x-2">
+                      <ArrowRight className="text-yellow-500" />
+                      <span>Expanding to other telecom services</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <ArrowRight className="text-red-500" />
+                      <span>Integration with more blockchain networks</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <ArrowRight className="text-indigo-500" />
+                      <span>Enhanced DeFi features</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+};
+
+export default ZeebuDashboard;
